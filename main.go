@@ -5,17 +5,7 @@ import (
 
 	"github.com/quanganh247-qa/gorm-project/app/server"
 	"github.com/quanganh247-qa/gorm-project/app/util"
-	"gorm.io/gorm"
 )
-
-var DB *gorm.DB
-
-// Product model with proper struct tags
-type Product struct {
-	ID    uint `gorm:"primaryKey"` // GORM handles auto-increment for primary key
-	Code  string
-	Price uint
-}
 
 func main() {
 	config, err := util.LoadConfig(".")
@@ -27,6 +17,8 @@ func main() {
 	defer func() {
 		server.Connection.Close()
 	}()
+
+	// routerDefault.Run(":8080")
 
 }
 

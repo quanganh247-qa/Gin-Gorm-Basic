@@ -1,20 +1,21 @@
 -- +goose Up
 CREATE TABLE Users (
-    user_id INT PRIMARY KEY ,
-    username VARCHAR(50) UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    created_at timestamptz NOT NULL DEFAULT (now())
+    id SERIAL PRIMARY KEY ,
+    username VARCHAR UNIQUE NOT NULL,
+    password_hash VARCHAR NOT NULL,
+    email VARCHAR UNIQUE NOT NULL,
+    created_at timestamptz NOT NULL DEFAULT (now()),
+    updated_at timestamptz NOT NULL DEFAULT (now())
 );
 
 CREATE TABLE Notes (
-    note_id INT PRIMARY KEY ,
-    user_id INT,
-    title VARCHAR(100) NOT NULL,
+    note_id BIGSERIAL PRIMARY KEY ,
+    user_id SERIAL,
+    title VARCHAR NOT NULL,
     content TEXT NOT NULL,
     created_at timestamptz NOT NULL DEFAULT (now()),
     updated_at timestamptz NOT NULL DEFAULT (now()),
-    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+    FOREIGN KEY (user_id) REFERENCES Users(id)
 );
 
 -- +goose Down
