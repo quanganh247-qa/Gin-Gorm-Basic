@@ -9,15 +9,15 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE Notes (
-    note_id BIGSERIAL PRIMARY KEY ,
-    user_id SERIAL,
+    note_id SERIAL PRIMARY KEY ,
+    username VARCHAR NOT NULL,
     title VARCHAR NOT NULL,
     content TEXT NOT NULL,
     created_at timestamptz NOT NULL DEFAULT (now()),
     updated_at timestamptz NOT NULL DEFAULT (now()),
-    FOREIGN KEY (user_id) REFERENCES Users(id)
+    FOREIGN KEY (username) REFERENCES Users(username)
 );
 
 -- +goose Down
-DROP TABLE users;
-DROP TABLE notes;
+DROP TABLE Users;
+DROP TABLE Notes;

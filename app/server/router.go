@@ -3,6 +3,7 @@ package server
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/quanganh247-qa/gorm-project/app/api/middleware"
+	"github.com/quanganh247-qa/gorm-project/app/api/notes"
 	"github.com/quanganh247-qa/gorm-project/app/api/users"
 	"github.com/quanganh247-qa/gorm-project/app/util"
 )
@@ -22,6 +23,7 @@ func (server *Server) SetupRoutes(config util.Config) {
 	}
 
 	users.Routes(routerGroup)
+	notes.Routes(routerGroup)
 
 	server.Router = routerDefault
 

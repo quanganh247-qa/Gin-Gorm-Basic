@@ -10,3 +10,12 @@ type User struct {
 	CreatedAt    time.Time `gorm:"autoCreateTime"`
 	UpdatedAt    time.Time `gorm:"autoUpdateTime"`
 }
+
+type Notes struct {
+	Note_id   int64     `gorm:"primaryKey;autoIncrement"`
+	Username  string    `gorm:"not null"`
+	Title     string    `gorm:"not null"`
+	Content   string    `gorm:"not null"`
+	CreatedAt time.Time `gorm:"autoCreateTime"`
+	UpdatedAt time.Time `gorm:"autoUpdateTime"`
+}

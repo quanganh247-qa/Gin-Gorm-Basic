@@ -30,9 +30,9 @@ func Init(config Config) (*Connection, error) {
 	}
 
 	sqlDB, err := sqldb.DB()
-	sqlDB.SetMaxOpenConns(25)                 // Maximum number of open connections to the database
-	sqlDB.SetMaxIdleConns(25)                 // Maximum number of connections in the idle connection pool
-	sqlDB.SetConnMaxLifetime(5 * time.Minute) // Maximum amount of time a connection may be reused
+	sqlDB.SetMaxOpenConns(10)           // Maximum number of open connections to the database
+	sqlDB.SetMaxIdleConns(100)          // Maximum number of connections in the idle connection pool
+	sqlDB.SetConnMaxLifetime(time.Hour) // Maximum amount of time a connection may be reused
 
 	db.InitStore(sqldb)
 	conn := &Connection{
