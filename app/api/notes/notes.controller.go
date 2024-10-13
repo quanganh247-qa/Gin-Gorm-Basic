@@ -8,12 +8,16 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/quanganh247-qa/gorm-project/app/api/middleware"
 	"github.com/quanganh247-qa/gorm-project/app/db"
+	"github.com/quanganh247-qa/gorm-project/app/util"
 )
 
 type NoteControllerInterface interface {
 	CreateNote(c *gin.Context)
 	GetNoteByID(c *gin.Context)
 	UpdateNote(c *gin.Context)
+	DeleteNote(c *gin.Context)
+	GetNotes(c *gin.Context)
+	GetNotesByUser(c *gin.Context)
 }
 
 func (controller *NoteController) CreateNote(c *gin.Context) {
@@ -66,4 +70,49 @@ func (controller *NoteController) UpdateNote(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"Update note successfully": note})
+}
+
+func (controller *NoteController) DeleteNote(c *gin.Context) {
+	noteID := c.Param("note_id")
+	idNum, err := strconv.ParseInt(noteID, 10, 16)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	err = controller.service.DeleteNote(c, idNum)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"Delete note successfully": noteID})
+}
+
+func (controller *NoteController) GetNotes(c *gin.Context) {
+	pagination, err := util.GetPageInQuery(c.Request.URL.Query())
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	notes, err := controller.service.GetNotes(c, pagination)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"Notes": notes})
+}
+
+func (controller *NoteController) GetNotesByUser(c *gin.Context) {
+	pagination, err := util.GetPageInQuery(c.Request.URL.Query())
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	authPayload, err := middleware.GetAuthorizationPayload(c)
+	fmt.Println(authPayload.Username)
+	notes, err := controller.service.GetNotesByUser(c, authPayload.Username, pagination)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"Notes": notes})
 }

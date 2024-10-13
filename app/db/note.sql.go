@@ -40,7 +40,7 @@ func (s *Store) GetNoteByID(c context.Context, noteID int64) (Notes, error) {
 	return note, nil
 }
 
-func (s *Store) GetNoteByUser(c context.Context, username string) ([]Notes, error) {
+func (s *Store) GetNoteByUser(c context.Context, username string, limit, ofset int) ([]Notes, error) {
 	var notes []Notes
 	result := s.db.WithContext(c).Where("username = ?", username).Find(&notes)
 	if result.Error != nil {
@@ -55,8 +55,6 @@ func (s *Store) UpdateNote(c context.Context, noteID int64, arg UpdateNoteReques
 	if err := s.db.WithContext(c).First(&note, "note_id = ?", noteID).Error; err != nil {
 		return Notes{}, fmt.Errorf("note not found: %w", err)
 	}
-
-	fmt.Println("Note found: ", note)
 
 	err := s.ExecTx(c, func(tx *gorm.DB) error {
 
@@ -90,4 +88,43 @@ func (s *Store) UpdateNote(c context.Context, noteID int64, arg UpdateNoteReques
 	}
 
 	return note, nil
+}
+
+func (s *Store) DeleteNoteByID(c context.Context, noteID int64) error {
+	if err := s.ExecTx(c, func(tx *gorm.DB) error {
+		var note Notes
+		if err := s.db.WithContext(c).First(&note, "note_id = ?", noteID).Error; err != nil {
+			return fmt.Errorf("note not found: %w", err)
+		}
+
+		result := s.db.WithContext(c).Delete(&note)
+		if result.Error != nil {
+			return fmt.Errorf("error deleting note: %w", result.Error)
+		}
+
+		return nil
+	}); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (s *Store) GetNotes(c context.Context, limit, offset int) ([]Notes, error) {
+	var notes []Notes
+	result := s.db.WithContext(c).Limit(limit).Offset(offset).Find(&notes)
+	if result.Error != nil {
+		return nil, fmt.Errorf("error getting notes: %w", result.Error)
+	}
+	return notes, nil
+}
+
+func (s *Store) GetNotesOfUser(c context.Context, username string, limit, offset int) ([]Notes, error) {
+	var notes []Notes
+	result := s.db.WithContext(c).Where("username = ?", username).Limit(limit).Offset(offset).Find(&notes)
+	if result.Error != nil {
+		return nil, fmt.Errorf("error getting notes: %w", result.Error)
+	}
+	return notes, nil
+
 }
