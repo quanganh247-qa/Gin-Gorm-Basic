@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gormproject
+spec:
+
+  selector:
+    matchLabels:
+      app: gormproject
+  template:
+    metadata:
+      labels:
+        app: gormproject
+    spec:
+      containers:
+      - name: gormproject
+        image: huuquanganhdinh573/gorm-project
+        env:
+        - name: DSN
+          value: "host=postgres user=postgres password=12345678 dbname=postgres port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        command: ["./wait-for-it.sh", "postgres:5432", "--", "./main"]
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gormproject
+spec:
+  type: NodePort
+
+  selector:
+    app: gormproject
+  ports:
+  - port: 8080
+    targetPort: 8080
+    nodePort: 30000
