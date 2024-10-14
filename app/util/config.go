@@ -9,15 +9,12 @@ import (
 )
 
 type Config struct {
-	Host                 string        `mapstructure:"HOST"`
-	DBDriver             string        `mapstructure:"DB_DRIVER"`
-	DBSource             string        `mapstructure:"DB_SOURCE"`
-	DSN                  string        `mapstructure:"DSN"`
-	HTTPServerAddress    string        `mapstructure:"HTTP_SERVER_ADDRESS"`
-	SymmetricKey         string        `mapstructure:"SYMMETRIC_KEY"`
-	AccessTokenDuration  time.Duration `mapstructure:"ACCESS_TOKEN_DURATION"`
-	RefreshTokenDuration time.Duration `mapstructure:"REFRESH_TOKEN_DURATION"`
-	ApiPrefix            string        `mapstructure:"API_PREFIX"`
+	Host                string        `mapstructure:"HOST"`
+	DSN                 string        `mapstructure:"DSN"`
+	HTTPServerAddress   string        `mapstructure:"HTTP_SERVER_ADDRESS"`
+	SymmetricKey        string        `mapstructure:"SYMMETRIC_KEY"`
+	AccessTokenDuration time.Duration `mapstructure:"ACCESS_TOKEN_DURATION"`
+	ApiPrefix           string        `mapstructure:"API_PREFIX"`
 }
 
 var Configs = Config{}

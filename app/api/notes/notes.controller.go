@@ -17,7 +17,7 @@ type NoteControllerInterface interface {
 	UpdateNote(c *gin.Context)
 	DeleteNote(c *gin.Context)
 	GetNotes(c *gin.Context)
-	GetNotesByUser(c *gin.Context)
+	GetNotesOfUser(c *gin.Context)
 }
 
 func (controller *NoteController) CreateNote(c *gin.Context) {
@@ -93,6 +93,7 @@ func (controller *NoteController) GetNotes(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	fmt.Println(pagination)
 	notes, err := controller.service.GetNotes(c, pagination)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -101,7 +102,7 @@ func (controller *NoteController) GetNotes(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"Notes": notes})
 }
 
-func (controller *NoteController) GetNotesByUser(c *gin.Context) {
+func (controller *NoteController) GetNotesOfUser(c *gin.Context) {
 	pagination, err := util.GetPageInQuery(c.Request.URL.Query())
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -109,7 +110,7 @@ func (controller *NoteController) GetNotesByUser(c *gin.Context) {
 	}
 	authPayload, err := middleware.GetAuthorizationPayload(c)
 	fmt.Println(authPayload.Username)
-	notes, err := controller.service.GetNotesByUser(c, authPayload.Username, pagination)
+	notes, err := controller.service.GetNotesOfUser(c, authPayload.Username, pagination)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

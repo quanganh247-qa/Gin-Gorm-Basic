@@ -12,12 +12,12 @@ const (
 
 type Pagination struct {
 	Page     int64 `json:"page"`
-	PageSize int64 `json:"page_size"`
+	PageSize int64 `json:"pageSize"`
 }
 
 func GetPageInQuery(query url.Values) (*Pagination, error) {
 	paginagion := Pagination{}
-	fmt.Println(query.Get("page"), query.Get("page_size"))
+	fmt.Println(query.Get("page"), query.Get("pageSize"))
 	page, err := strconv.ParseInt(query.Get("page"), 10, 64)
 	if err != nil || query.Get("page") == "" {
 		page = 1

@@ -22,6 +22,6 @@ func Routes(routerGroup middleware.RouterGroup) {
 		authRoute.PUT("/:note_id", notesAPI.controller.UpdateNote)
 		authRoute.DELETE("/:note_id", notesAPI.controller.DeleteNote)
 		authRoute.GET("/all-notes", notesAPI.controller.GetNotes)
-		authRoute.GET("/", notesAPI.controller.GetNotesByUser)
+		authRoute.GET("/", notesAPI.controller.GetNotesOfUser)
 	}
 }

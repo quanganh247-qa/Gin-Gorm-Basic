@@ -1,0 +1,39 @@
+version: '3.9'
+
+services:
+  gormproject:
+    image: gormproject
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - DSN=host=postgres user=postgres password=12345678 dbname=postgres port=5432 sslmode=disable TimeZone=Asia/Shanghai
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+    command: ["./wait-for-it.sh", "postgres:5432", "--", "./main"]
+
+
+  postgres:
+    image: postgres:13-alpine
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345678
+      POSTGRES_DB: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres-data:

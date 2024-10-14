@@ -14,7 +14,7 @@ type NoteServiceInterface interface {
 	UpdateNote(c *gin.Context, req db.UpdateNoteRequest, nodeId int64) (*db.Notes, error)
 	DeleteNote(c *gin.Context, noteID int64) error
 	GetNotes(c *gin.Context, pagination *util.Pagination) ([]db.Notes, error)
-	GetNotesByUser(c *gin.Context, username string, pagination *util.Pagination) ([]db.Notes, error)
+	GetNotesOfUser(c *gin.Context, username string, pagination *util.Pagination) ([]db.Notes, error)
 }
 
 func (s *NoteService) CreateNote(c *gin.Context, username string, req CreateNoteRequest) (*db.Notes, error) {
@@ -68,11 +68,11 @@ func (s *NoteService) GetNotes(c *gin.Context, pagination *util.Pagination) ([]d
 	return notes, nil
 }
 
-func (s *NoteService) GetNotesByUser(c *gin.Context, username string, pagination *util.Pagination) ([]db.Notes, error) {
+func (s *NoteService) GetNotesOfUser(c *gin.Context, username string, pagination *util.Pagination) ([]db.Notes, error) {
 	limit := pagination.PageSize
 	offset := (pagination.Page - 1) * pagination.PageSize
 
-	notes, err := s.store.GetNoteByUser(c, username, int(limit), int(offset))
+	notes, err := s.store.GetNotesOfUser(c, username, int(limit), int(offset))
 	if err != nil {
 		return nil, fmt.Errorf("failed to get notes: %w", err)
 	}

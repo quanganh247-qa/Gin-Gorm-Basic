@@ -40,15 +40,6 @@ func (s *Store) GetNoteByID(c context.Context, noteID int64) (Notes, error) {
 	return note, nil
 }
 
-func (s *Store) GetNoteByUser(c context.Context, username string, limit, ofset int) ([]Notes, error) {
-	var notes []Notes
-	result := s.db.WithContext(c).Where("username = ?", username).Find(&notes)
-	if result.Error != nil {
-		return nil, fmt.Errorf("error getting notes: %w", result.Error)
-	}
-	return notes, nil
-}
-
 func (s *Store) UpdateNote(c context.Context, noteID int64, arg UpdateNoteRequest) (Notes, error) {
 
 	var note Notes

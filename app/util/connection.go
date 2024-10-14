@@ -35,6 +35,9 @@ func Init(config Config) (*Connection, error) {
 	sqlDB.SetConnMaxLifetime(time.Hour) // Maximum amount of time a connection may be reused
 
 	db.InitStore(sqldb)
+	sqldb.AutoMigrate(&db.User{})
+	sqldb.AutoMigrate(&db.Notes{})
+
 	conn := &Connection{
 		Close: func() {
 			sqlDB.Close()

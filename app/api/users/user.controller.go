@@ -2,6 +2,7 @@ package users
 
 import (
 	"fmt"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/quanganh247-qa/gorm-project/app/util"
@@ -11,6 +12,7 @@ import (
 type UserServiceController interface {
 	CreateUser(ctx *gin.Context)
 	LoginUser(ctx *gin.Context)
+	TestGetQuery(ctx *gin.Context)
 }
 
 func (c *UserController) CreateUser(ctx *gin.Context) {
@@ -52,4 +54,13 @@ func (c *UserController) LoginUser(ctx *gin.Context) {
 	ctx.JSON(200, gin.H{
 		"token ": acccessToken,
 	})
+}
+
+func (c *UserController) TestGetQuery(ctx *gin.Context) {
+	pagination, err := util.GetPageInQuery(ctx.Request.URL.Query())
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	ctx.JSON(http.StatusOK, gin.H{"pagination": pagination})
 }
