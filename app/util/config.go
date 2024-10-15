@@ -11,6 +11,7 @@ import (
 type Config struct {
 	Host                string        `mapstructure:"HOST"`
 	DSN                 string        `mapstructure:"DSN"`
+	DSN1                string        `mapstructure:"DSN1"`
 	HTTPServerAddress   string        `mapstructure:"HTTP_SERVER_ADDRESS"`
 	SymmetricKey        string        `mapstructure:"SYMMETRIC_KEY"`
 	AccessTokenDuration time.Duration `mapstructure:"ACCESS_TOKEN_DURATION"`

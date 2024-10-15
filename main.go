@@ -3,10 +3,22 @@ package main
 import (
 	"log"
 
+	_ "github.com/quanganh247-qa/gorm-project/docs"
+
 	"github.com/quanganh247-qa/gorm-project/app/server"
 	"github.com/quanganh247-qa/gorm-project/app/util"
 )
 
+// @title 	Notes Service API
+// @version	1.0
+// @description APIs in Go using Gin framework
+
+// @securityDefinitions.apikey Bearer
+// @in header
+// @name Authorization
+
+// @host 	localhost:8080
+// @BasePath /api/v1
 func main() {
 	config, err := util.LoadConfig(".")
 	if err != nil {

@@ -24,7 +24,7 @@ func Init(config Config) (*Connection, error) {
 		return nil, fmt.Errorf("can't create token maker: %w", err)
 	}
 
-	sqldb, err := gorm.Open(postgres.Open(config.DSN), &gorm.Config{})
+	sqldb, err := gorm.Open(postgres.Open(config.DSN1), &gorm.Config{})
 	if err != nil {
 		log.Fatal("Error connecting to DB:", err)
 	}

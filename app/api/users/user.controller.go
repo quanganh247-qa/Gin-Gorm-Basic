@@ -15,6 +15,15 @@ type UserServiceController interface {
 	TestGetQuery(ctx *gin.Context)
 }
 
+// CreateUser           godoc
+// @Summary 			Create a new user
+// @Description 		Create a new user
+// @Tags 				users
+// @Accept  			json
+// @Produce  			json
+// @Param 				user body CreateUserRequest true "User info"
+// @Success 			200 {object} db.User
+// @Router 				/user/create [post]
 func (c *UserController) CreateUser(ctx *gin.Context) {
 	var req CreateUserRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
@@ -35,6 +44,15 @@ func (c *UserController) CreateUser(ctx *gin.Context) {
 	})
 }
 
+// LoginUser           	godoc
+// @Summary 			Login user
+// @Description 		Login user
+// @Tags 				users
+// @Accept  			json
+// @Produce  			json
+// @Param 				user body LoginRequest true "User info"
+// @Success 			200 {object} LoginRepsonse
+// @Router 				/user/login [post]
 func (c *UserController) LoginUser(ctx *gin.Context) {
 	var req LoginRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
