@@ -11,3 +11,6 @@ Private Key: The private key remains on your local machine. When you attempt to 
 ``` sudo chmod 644 /etc/rancher/k3s/k3s.yaml ```
 ``` cat /etc/rancher/k3s/k3s.yaml ```
 ``` clusterctl init --infrastructure vsphere --bootstrap k3s --control-plane k3s ```
+![image](https://github.com/user-attachments/assets/3423f308-b468-4f03-beaf-62ca6ccceac3)
+
+![image](https://github.com/user-attachments/assets/260f03fc-5ee9-4666-a74f-ec1769aa10c0)
