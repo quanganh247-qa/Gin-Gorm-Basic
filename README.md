@@ -19,3 +19,6 @@ Private Key: The private key remains on your local machine. When you attempt to 
 => 
 `export KUBECONFIG=/etc/rancher/k3s/k3s.yaml`
 `sudo chmod 644 /etc/rancher/k3s/k3s.yaml`
+
+
+![image](https://github.com/user-attachments/assets/59f916db-ecdc-4cdc-a3d6-cba3e9c50d93)
