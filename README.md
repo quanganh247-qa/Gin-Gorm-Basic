@@ -7,3 +7,7 @@ Public Key
 : The public key is the one you provide to the virtual machine. It is installed on the VM when you create or provision it. This allows your local machine to authenticate with the VM using the corresponding private key.
  
 Private Key: The private key remains on your local machine. When you attempt to SSH into the virtual machine, your local machine uses the private key to authenticate with the VM using the public key installed on the VM.
+
+``` sudo chmod 644 /etc/rancher/k3s/k3s.yaml ```
+``` cat /etc/rancher/k3s/k3s.yaml ```
+``` clusterctl init --infrastructure vsphere --bootstrap k3s --control-plane k3s ```
