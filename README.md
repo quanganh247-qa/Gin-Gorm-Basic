@@ -22,3 +22,7 @@ Private Key: The private key remains on your local machine. When you attempt to 
 
 
 ![image](https://github.com/user-attachments/assets/59f916db-ecdc-4cdc-a3d6-cba3e9c50d93)
+
+check logs pods:
+```sudo k3s kubectl get pods -n capv-system```
+``` sudo k3s kubectl logs <pod-name> -n capv-system ```
