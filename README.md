@@ -28,3 +28,5 @@ check logs pods:
 ``` sudo k3s kubectl logs <pod-name> -n capv-system ```
 
 ![image](https://github.com/user-attachments/assets/e1b20064-e311-4fd8-b62c-46645e74a44c)
+
+``` kubectl delete vspheremachinetemplate k3s-vs-control-plane -n default ```
