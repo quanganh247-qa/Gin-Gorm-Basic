@@ -1,4 +1,4 @@
-## Aruchitecture diagram
+![image](https://github.com/user-attachments/assets/5181e907-ece3-4fa2-a000-2c310c00ffcb)## Aruchitecture diagram
 
 ![image](https://github.com/user-attachments/assets/ca17c4d2-dc75-4cb4-8fa0-3870fba4a055)
 
@@ -33,5 +33,9 @@ check logs pods:
 
 I1027 16:22:31.756225       1 session.go:148] "Found active cached vSphere client session" controller="vspherecluster" controllerGroup="infrastructure.cluster.x-k8s.io" controllerKind="VSphereCluster" VSphereCluster="default/k3s-test" namespace="default" name="k3s-test" reconcileID="96468b46-24aa-465c-963f-c586e0268e85" Cluster="default/k3s-test" server="10.1.148.31" datacenter="" username="administrator@vsphere.local"
 
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/b787a601-3df5-40ec-859b-37866df141c7)
+
+![image](https://github.com/user-attachments/assets/e01f2deb-4cad-44bd-8577-dfda4af7b6da)
+
+
 
