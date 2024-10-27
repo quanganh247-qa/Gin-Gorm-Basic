@@ -38,4 +38,5 @@ I1027 16:22:31.756225       1 session.go:148] "Found active cached vSphere clien
 ![image](https://github.com/user-attachments/assets/e01f2deb-4cad-44bd-8577-dfda4af7b6da)
 
 
+![image](https://github.com/user-attachments/assets/36843484-4b87-4abb-9bab-49367db2d46c)
 
