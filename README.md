@@ -30,3 +30,8 @@ check logs pods:
 ![image](https://github.com/user-attachments/assets/e1b20064-e311-4fd8-b62c-46645e74a44c)
 
  ```clusterctl delete --infrastructure vsphere```
+
+I1027 16:22:31.756225       1 session.go:148] "Found active cached vSphere client session" controller="vspherecluster" controllerGroup="infrastructure.cluster.x-k8s.io" controllerKind="VSphereCluster" VSphereCluster="default/k3s-test" namespace="default" name="k3s-test" reconcileID="96468b46-24aa-465c-963f-c586e0268e85" Cluster="default/k3s-test" server="10.1.148.31" datacenter="" username="administrator@vsphere.local"
+
+![Uploading image.png…]()
+
