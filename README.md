@@ -7,7 +7,20 @@ Public Key
 : The public key is the one you provide to the virtual machine. It is installed on the VM when you create or provision it. This allows your local machine to authenticate with the VM using the corresponding private key.
  
 Private Key: The private key remains on your local machine. When you attempt to SSH into the virtual machine, your local machine uses the private key to authenticate with the VM using the public key installed on the VM.
+```
+# Cấu hình kubectl
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
+# Hoặc copy config về thư mục mặc định
+mkdir -p ~/.kube
+sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+sudo chown $USER:$USER ~/.kube/config
+
+# Kiểm tra cluster
+kubectl get nodes
+kubectl get pods -A
+ ```
+--------------
 ``` sudo chmod 644 /etc/rancher/k3s/k3s.yaml ```
 ``` cat /etc/rancher/k3s/k3s.yaml ```
 ``` clusterctl init --infrastructure vsphere --bootstrap k3s --control-plane k3s ```
@@ -34,6 +47,8 @@ check logs pods:
 I1027 16:22:31.756225       1 session.go:148] "Found active cached vSphere client session" controller="vspherecluster" controllerGroup="infrastructure.cluster.x-k8s.io" controllerKind="VSphereCluster" VSphereCluster="default/k3s-test" namespace="default" name="k3s-test" reconcileID="96468b46-24aa-465c-963f-c586e0268e85" Cluster="default/k3s-test" server="10.1.148.31" datacenter="" username="administrator@vsphere.local"
 
 ![image](https://github.com/user-attachments/assets/b787a601-3df5-40ec-859b-37866df141c7)
+
+
 
 ![image](https://github.com/user-attachments/assets/e01f2deb-4cad-44bd-8577-dfda4af7b6da)
 
