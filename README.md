@@ -15,6 +15,7 @@ export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 mkdir -p ~/.kube
 sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
 sudo chown $USER:$USER ~/.kube/config
+sudo systemctl start k3s
 
 # Kiểm tra cluster
 kubectl get nodes
